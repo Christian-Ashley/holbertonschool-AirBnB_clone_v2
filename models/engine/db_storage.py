@@ -24,7 +24,7 @@ class FileStorage:
             if cls in self.CDIC.keys():
                 cls = self.CDIC.get(cls)
             spec_rich = {}
-            for ky, vl in self.__objects.items():
+            for ky, vl in self. .items():
                 if cls == type(vl):
                     spec_rich[ky] = vl
             return spec_rich
@@ -76,4 +76,4 @@ class FileStorage:
             pass
 
     def close(self):
-        self.reload()
+        self.__session()
