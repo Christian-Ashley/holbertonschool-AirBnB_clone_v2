@@ -19,7 +19,7 @@ class State(BaseModel, Base):
         name = ""
 	cites = []
 
-     def cities(self):
+    def cities(self):
             """
                 getter method, returns list of City objs from storage
                 linked to the current State
