@@ -17,15 +17,18 @@ class State(BaseModel, Base):
         cities = relationship("City", backref="state")
     else:
         name = ""
-	cites = []
 
-    def cities(self):
-        """
-            getter method, returns list of City objs from storage
-            linked to the current State
-        """
-        city_list = []
-        for city in models.storage.all("City").values():
-            if city.state_id == self.id:
-                city_list.append(city)
-        return city_list
+    def __init__(self, *args, **kwargs):
+        """initializes state"""
+        super().__init__(*args, **kwargs)
+
+    if models.storage_t != "db":
+        @property
+        def cities(self):
+            """getter for list of city instances related to the state"""
+            city_list = []
+            all_cities = models.storage.all(City)
+            for city in all_cities.values():
+                if city.state_id == self.id:
+                    city_list.append(city)
+            return city_list
